@@ -1,0 +1,21 @@
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-right: 1rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.checkboxLabel input {
+  cursor: pointer;
+}

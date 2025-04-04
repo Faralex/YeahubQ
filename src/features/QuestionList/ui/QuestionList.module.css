@@ -1,0 +1,38 @@
+.questionItem {
+  margin-bottom: 1rem;
+}
+
+.questionTitle {
+  cursor: pointer;
+  font-weight: bold;
+  color: #ffffff;
+  transition: color 0.2s ease;
+}
+
+.questionTitle:hover {
+  color: #a29bfe;
+}
+
+.shortAnswer {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #333333;
+  border-left: 4px solid #6c5ce7;
+  border-radius: 8px;
+  color: #f1f1f1;
+}
+
+.readMore {
+  display: inline-block;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #a29bfe;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.readMore:hover {
+  color: #dfe6e9;
+  text-decoration: underline;
+}

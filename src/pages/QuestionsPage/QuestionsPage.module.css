@@ -1,0 +1,154 @@
+.questionItem {
+  margin-bottom: 1rem;
+}
+
+.questionTitle {
+  cursor: pointer;
+  font-weight: bold;
+  color: #ffffff;
+  transition: color 0.2s ease;
+}
+
+.questionTitle:hover {
+  color: #a29bfe;
+}
+
+.shortAnswer {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #333333;
+  border-left: 4px solid #6c5ce7;
+  border-radius: 8px;
+  color: #f1f1f1;
+}
+
+.readMore {
+  display: inline-block;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #a29bfe;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.readMore:hover {
+  color: #dfe6e9;
+  text-decoration: underline;
+}
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pageButton {
+  background-color: transparent;
+  border: 1px solid #a29bfe;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  color: #a29bfe;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pageButton:hover {
+  background-color: #2d2d2d;
+}
+
+.active {
+  background-color: #a29bfe;
+  color: #fff;
+  font-weight: bold;
+}
+
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pageButton {
+  background-color: transparent;
+  border: 1px solid #a29bfe;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  color: #a29bfe;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pageButton:hover:not(:disabled) {
+  background-color: #2d2d2d;
+}
+
+.pageButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.active {
+  background-color: #a29bfe;
+  color: #fff;
+  font-weight: bold;
+}
+.searchForm {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.searchInput {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #a29bfe;
+  background-color: #1e1e1e;
+  color: #fff;
+  width: 300px;
+}
+
+.searchButton {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background-color: #a29bfe;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.searchButton:hover {
+  background-color: #8c7ae6;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.select {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  background-color: #1e1e1e;
+  border: 1px solid #a29bfe;
+  color: #fff;
+}
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-right: 1rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.checkboxLabel input {
+  cursor: pointer;
+}
