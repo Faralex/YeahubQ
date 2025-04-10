@@ -1,20 +1,20 @@
 import { useSearchParams } from "react-router-dom";
-import { useGetPublicQuestionsQuery } from "../../shared/api/baseApi";
+import { useGetPublicQuestionsQuery, useGetSkillsQuery } from "../../shared/api/baseApi";
 import { useState } from "react";
-
-import { SearchForm, QuestionList, ComplexityFilter } from "../../features/";
-
+import { Question as EntityQuestion } from "../../entities/Question";
 import {
-  Pagination,
   handlePageChange,
   handleSearch,
-  toggleId,
   handleCheckboxChange,
-  ResetFiltersButton,
+  toggleId,
+  getVisiblePageNumbers,
 } from "../../features/pagination";
+import { QuestionSection } from "../../widgets/QuestionSection";
+import { Header } from "../../widgets/Header/ui/Header";
+import { Skill } from "../../shared/types/questions";
 
-const QUESTIONS_PER_PAGE = 15;
-const MAX_VISIBLE_PAGES = 10;
+const QUESTIONS_PER_PAGE = 8;
+const MAX_VISIBLE_PAGES = 6;
 
 export const QuestionsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,14 +24,21 @@ export const QuestionsPage = () => {
   const rawComplexity = searchParams.get("complexity") || "";
   const complexity = rawComplexity ? rawComplexity.split(",") : [];
 
+  const rawSkills = searchParams.get("skills") || "";
+  const selectedSkills = rawSkills ? rawSkills.split(",").map(Number) : [];
+
   const [searchTerm, setSearchTerm] = useState(title);
   const [openedQuestionId, setOpenedQuestionId] = useState<number | null>(null);
+
+  const { data: skillsData } = useGetSkillsQuery();
+  const skills = skillsData?.data || [];
 
   const { data, isLoading, error } = useGetPublicQuestionsQuery({
     page,
     limit: QUESTIONS_PER_PAGE,
     title,
     complexity,
+    skills: selectedSkills,
   });
 
   const onPageChange = (newPage: number) =>
@@ -71,45 +78,49 @@ export const QuestionsPage = () => {
     setOpenedQuestionId(null);
   };
 
+  const handleSkillChange = (id: number, checked: boolean) => {
+    const updated = checked ? [...selectedSkills, id] : selectedSkills.filter((s) => s !== id);
+
+    setSearchParams({
+      page: "1",
+      title,
+      complexity: complexity.join(","),
+      skills: updated.join(","),
+    });
+
+    setOpenedQuestionId(null);
+  };
+
   if (isLoading) return <p>Загрузка...</p>;
   if (error) return <p>Ошибка загрузки</p>;
 
   const totalPages = Math.ceil((data?.total || 0) / QUESTIONS_PER_PAGE);
-  const currentBlock = Math.floor((page - 1) / MAX_VISIBLE_PAGES);
-  const startPage = currentBlock * MAX_VISIBLE_PAGES + 1;
-  const endPage = Math.min(startPage + MAX_VISIBLE_PAGES - 1, totalPages);
-  const pageNumbers = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+  const pageNumbers = getVisiblePageNumbers({
+    currentPage: page,
+    totalPages,
+    maxVisiblePages: MAX_VISIBLE_PAGES,
+  });
 
   return (
     <div>
-      <h1>Список вопросов</h1>
-
-      {/* Поиск */}
-      <SearchForm value={searchTerm} onChange={setSearchTerm} onSubmit={onSearch} />
-
-      {/*Фильтр по сложности */}
-      <ComplexityFilter selected={complexity} onChange={onComplexityChange} />
-
-      {/* Сброс фильтров */}
-      <ResetFiltersButton
-        searchTerm={searchTerm}
-        complexity={complexity}
-        onReset={onResetFilters}
-      />
-
-      {/* Вопросы */}
-      <QuestionList
-        questions={data?.data || []}
-        openedQuestionId={openedQuestionId}
-        onToggle={toggleQuestion}
-      />
-
-      {/* Пагинация */}
-      <Pagination
+      <Header />
+      <QuestionSection
+        questions={(data?.data as EntityQuestion[]) || []}
         page={page}
         totalPages={totalPages}
         pageNumbers={pageNumbers}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        complexity={complexity}
+        selectedSkills={selectedSkills}
+        skills={skills as Skill[]}
+        openedQuestionId={openedQuestionId}
+        onSearch={onSearch}
+        onReset={onResetFilters}
+        onComplexityChange={onComplexityChange}
+        onToggle={toggleQuestion}
         onPageChange={onPageChange}
+        onSkillChange={handleSkillChange}
       />
     </div>
   );

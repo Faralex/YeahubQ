@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useGetPublicQuestionByIdQuery } from "../../shared/api/baseApi";
 import styles from "./QuestionDetailsPage.module.css";
-import { stripHtml } from "../../shared/lib/stripHtml";
+import { stripHtml } from "../../shared/lib/stripHtml/stripHtml";
 import { BackButton } from "../../shared/ui/BackButton/BackButton";
 
 export const QuestionDetailsPage = () => {

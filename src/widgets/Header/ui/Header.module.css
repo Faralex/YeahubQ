@@ -1,0 +1,19 @@
+.header {
+  width: 97%;
+  height: 60px;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+  margin: 0;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.userIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}

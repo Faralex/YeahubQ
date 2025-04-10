@@ -1,8 +1,7 @@
 .filters {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -10,10 +9,8 @@
 .checkboxLabel {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  margin-right: 1rem;
-  color: #fff;
-  cursor: pointer;
+  gap: 4px;
+  margin: 0;
 }
 
 .checkboxLabel input {
