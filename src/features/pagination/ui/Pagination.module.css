@@ -1,26 +1,57 @@
 .pagination {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
-  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
 }
 
 .pageButton {
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  border: 1px solid #a29bfe;
-  background-color: #1e1e1e;
-  color: #fff;
+  background: transparent;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 12px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: color 0.2s;
 }
 
 .pageButton:hover {
-  background-color: #6c5ce7;
+  color: #6a0bff;
 }
 
 .active {
-  background-color: #a29bfe;
-  font-weight: bold;
+  background-color: #6a0bff;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.dots {
+  color: #999;
+  padding: 0 6px;
+  font-size: 18px;
+}
+
+.navButton {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #6a0bff;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.navButton img {
+  width: 16px;
+  height: 16px;
+}
+
+.navButton:disabled {
+  opacity: 0.4;
+  cursor: default;
 }

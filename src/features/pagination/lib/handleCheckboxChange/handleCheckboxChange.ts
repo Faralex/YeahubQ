@@ -1,5 +1,4 @@
-import { Params } from "./types";
-import { buildParams } from "../buildParams/buildParams";
+import { buildParams } from "../../../../shared/lib/buildParams/buildParams";
 
 export const handleCheckboxChange = ({
   value,

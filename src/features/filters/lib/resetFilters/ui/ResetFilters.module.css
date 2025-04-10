@@ -1,0 +1,11 @@
+.textReset {
+  font-weight: 600;
+  color: #f3164e;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 110%;
+}
+
+.textReset:hover {
+  color: #373ee6;
+}

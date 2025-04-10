@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { QuestionsResponse, Question } from "../types/questions";
+import type { Question } from "../../entities/Question";
+import type { Skill } from "../../entities/Skill/model/types";
+import type { GetPublicQuestionsArgs, GetPublicQuestionsResponse } from "./types";
 
 export const baseApi = createApi({
   reducerPath: "api",
@@ -7,27 +9,32 @@ export const baseApi = createApi({
     baseUrl: "https://api.yeatwork.ru/",
   }),
   endpoints: (builder) => ({
-    getPublicQuestions: builder.query<
-      QuestionsResponse,
-      { page: number; limit: number; title?: string; complexity?: string[] }
-    >({
-      query: ({ page, limit, title, complexity }) => {
+    // Вопросы и фильтры
+    getPublicQuestions: builder.query<GetPublicQuestionsResponse, GetPublicQuestionsArgs>({
+      query: ({ page, limit, title, complexity, skills }) => {
         const params = new URLSearchParams();
-        params.set("page", String(page));
-        params.set("limit", String(limit));
-        if (title) params.set("title", title);
-        if (complexity && complexity.length > 0) {
-          params.set("complexity", complexity.join(","));
-        }
+        params.append("page", String(page));
+        params.append("limit", String(limit));
+
+        if (title) params.append("title", title);
+        if (complexity?.length) params.append("complexity", complexity.join(","));
+        if (skills?.length) params.append("skills", skills.join(","));
 
         return `questions/public-questions?${params.toString()}`;
       },
     }),
 
+    // вопрос по ID
     getPublicQuestionById: builder.query<Question, number>({
       query: (id) => `questions/public-questions/${id}`,
+    }),
+
+    // навыкии
+    getSkills: builder.query<Skill[], void>({
+      query: () => "skills",
     }),
   }),
 });
 
-export const { useGetPublicQuestionsQuery, useGetPublicQuestionByIdQuery } = baseApi;
+export const { useGetPublicQuestionsQuery, useGetPublicQuestionByIdQuery, useGetSkillsQuery } =
+  baseApi;
