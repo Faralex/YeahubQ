@@ -1,58 +1,54 @@
-import { SearchForm } from "../../../features/SearchForm";
-import { ComplexityFilter } from "../../../features/ComplexityFilter";
-import { ResetFiltersButton } from "../../../features/pagination";
-import { QuestionList } from "../../../features/QuestionList";
-import { Pagination } from "../../../features/pagination";
-import { SkillFilter } from "../../../entities/Skill";
+import { QuestionFilters } from "../../QuestionFilters";
+import { QuestionResults } from "../../QuestionResults";
+import { QuestionPagination } from "../../QuestionPagination";
 import { QuestionSectionProps } from "../types";
-import { QuestionTable } from "../../QuestionTable/ui/QuestionTable";
+import { useState } from "react";
 import styles from "./QuestionSection.module.css";
 
-export function QuestionSection({
-  questions,
-  page,
-  totalPages,
-  pageNumbers,
-  complexity,
-  searchTerm,
-  setSearchTerm,
-  selectedSkills,
-  skills,
-  openedQuestionId,
-  onSearch,
-  onReset,
-  onComplexityChange,
-  onToggle,
-  onPageChange,
-  onSkillChange,
-}: QuestionSectionProps) {
+export const QuestionSection = ({ filters, pagination, questions }: QuestionSectionProps) => {
+  const [selectedQuestionIds, setSelectedQuestionIds] = useState<number[]>([]);
+
+  const handleQuestionSelect = (id: number, checked: boolean) => {
+    setSelectedQuestionIds((prev) => (checked ? [...prev, id] : prev.filter((qId) => qId !== id)));
+  };
+
+  const handleClearSelected = () => {
+    setSelectedQuestionIds([]);
+  };
+
   return (
     <div className={styles.sectionWrapper}>
       <div className={styles.mainContent}>
         <div className={styles.filtersRow}>
-          <SearchForm value={searchTerm} onChange={setSearchTerm} onSubmit={onSearch} />
-          <ComplexityFilter selected={complexity} onChange={onComplexityChange} />
-          <ResetFiltersButton searchTerm={searchTerm} complexity={complexity} onReset={onReset} />
+          <QuestionFilters
+            searchTerm={filters.state.searchTerm}
+            setSearchTerm={filters.state.setSearchTerm}
+            complexity={filters.state.complexity}
+            onSearch={filters.handlers.onSearch}
+            onReset={filters.handlers.onReset}
+            onComplexityChange={filters.handlers.onComplexityChange}
+            onClearSelected={handleClearSelected}
+          />
         </div>
-
-        <QuestionTable />
 
         <div className={styles.contentWrapper}>
-          <QuestionList
-            questions={questions}
-            openedQuestionId={openedQuestionId}
-            onToggle={onToggle}
+          <QuestionResults
+            questions={questions.list}
+            openedQuestionId={questions.openedQuestionId}
+            onToggle={questions.onToggle}
+            onSkillClickFromQuestion={filters.handlers.onSkillClickFromQuestion}
+            selectedQuestionIds={selectedQuestionIds}
+            onSelect={handleQuestionSelect}
           />
-          <SkillFilter skills={skills} selected={selectedSkills} onChange={onSkillChange} />
         </div>
 
-        <Pagination
-          page={page}
-          totalPages={totalPages}
-          pageNumbers={pageNumbers}
-          onPageChange={onPageChange}
+        <QuestionPagination
+          page={pagination.page}
+          totalPages={pagination.totalPages}
+          pageNumbers={pagination.pageNumbers}
+          onPageChange={pagination.onPageChange}
         />
       </div>
     </div>
   );
-}
+};

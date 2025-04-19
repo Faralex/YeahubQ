@@ -1,2 +1,2 @@
-export { QuestionsPage } from "./QuestionsPage/QuestionsPage";
-export { QuestionDetailsPage } from "./QuestionDetailsPage/QuestionDetailsPage";
+export { QuestionsPage } from "./QuestionsPage/ui/QuestionsPage";
+export { QuestionDetailsPage } from "./QuestionDetailsPage/ui/QuestionDetailsPage";

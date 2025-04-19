@@ -1,0 +1,151 @@
+.questionItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 5px 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.center {
+  flex: 1;
+  padding: 0 24px;
+}
+
+.right {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-right: 10px;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.specializations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: red;
+}
+
+.complexity {
+  margin-top: 10px;
+  font-weight: 500;
+  color: #888;
+}
+
+.center {
+  flex: 1;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.title:hover {
+  color: #6a0bff;
+}
+
+.details {
+  margin-top: 12px;
+}
+
+.shortAnswer {
+  max-width: 500px;
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.readMore {
+  font-size: 14px;
+  color: #6a0bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.checkbox {
+  margin-right: 16px;
+  /* transform: scale(1.2); */
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.expand {
+  font-size: 12px;
+  margin-top: 10px;
+  font-weight: 500;
+  color: #bababa;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.expand:hover {
+  color: #5122c3;
+}
+
+.arrowIcon {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s;
+}
+.skills {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.skill {
+  color: #303030;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .shortAnswer {
+    margin-left: 0;
+    margin-top: 6px;
+    padding: 6px 10px;
+    font-size: 14px;
+    border-left: 3px solid #6c5ce7;
+    word-wrap: break-word;
+    width: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shortAnswer {
+    font-size: 13px;
+    padding: 5px 8px;
+    border-left: 2px solid #6c5ce7;
+    width: 350px;
+  }
+}

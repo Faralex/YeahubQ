@@ -1,6 +1,5 @@
 import styles from "./SkillFilter.module.css";
 import { Skill } from "../../model/types";
-
 interface Props {
   skills: Skill[];
   selected: number[];
